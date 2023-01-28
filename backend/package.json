@@ -4,14 +4,14 @@
   "description": "Sprocket API for sprocket factory app",
   "main": "dist/app.js",
   "author": "Gustavo Silva <gustavo.silva.nav@gmail.com>",
-  "repository": "no yet",
+  "repository": "https://github.com/GustavoSilvaNavarro/sprocket-factory-app/tree/main/backend",
   "license": "MIT",
   "scripts": {
     "start": "node .",
     "prestart": "npm run build:webpack",
     "format-check:prettier": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --quiet",
-    "start:dev": "nodemon src/app.ts --exec ts-node",
+    "start:dev": "nodemon",
     "build": "tsc",
     "build:webpack": "webpack",
     "start:production": "yarn run build:webpack && node .",
@@ -35,6 +35,7 @@
     "@typescript-eslint/parser": "^5.49.0",
     "eslint": "^8.32.0",
     "eslint-config-prettier": "^8.6.0",
+    "eslint-import-resolver-typescript": "^3.5.3",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
     "morgan": "^1.10.0",
@@ -42,6 +43,10 @@
     "prettier": "^2.8.3",
     "ts-loader": "^9.4.2",
     "ts-node": "^10.9.1",
-    "typescript": "^4.9.4"
+    "tsconfig-paths": "^4.1.2",
+    "typescript": "^4.9.4",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-node-externals": "^3.0.0"
   }
 }

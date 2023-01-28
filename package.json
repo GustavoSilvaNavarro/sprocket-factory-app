@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Sprocket Factory Web App",
   "main": "index.js",
-  "repository": "no yet",
+  "repository": "https://github.com/GustavoSilvaNavarro/sprocket-factory-app",
   "author": "Gustavo Silva <gustavo.silva.nav@gmail.com>",
   "license": "MIT",
   "scripts": {

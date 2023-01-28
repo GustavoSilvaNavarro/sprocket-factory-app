@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import serverConnection from './server/server';
+import serverConnection from '@/server/server';
 
 const { app } = serverConnection;
 
