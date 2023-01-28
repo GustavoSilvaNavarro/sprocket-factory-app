@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  server:
+    container_name: sprocket-api
+    restart: unless-stopped
+    image: sprocket-api:1.0.0
+    build:
+      context: bakckend
+      dockerfile: dockerfile
+    ports:
+      - 8080:8080
+    networks:
+      - apishared-network
+
+networks:
+  apishared-network:
