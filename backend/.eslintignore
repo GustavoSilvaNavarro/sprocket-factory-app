@@ -1,0 +1,9 @@
+node_modules
+dist
+coverage
+.env
+husky
+.vscode
+jest.config.js
+__assets__
+webpack.config.js

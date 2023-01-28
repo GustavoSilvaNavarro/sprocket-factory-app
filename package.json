@@ -1,0 +1,28 @@
+{
+  "name": "sprocket-app",
+  "version": "1.0.0",
+  "description": "Sprocket Factory Web App",
+  "main": "index.js",
+  "repository": "no yet",
+  "author": "Gustavo Silva <gustavo.silva.nav@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "install": "cd ./backend && yarn",
+    "backend:format-check": "cd ./backend && yarn run format-check:prettier",
+    "lint:backend": "cd ./backend && yarn run lint",
+    "start-dev:backend": "cd ./backend && yarn run start:dev",
+    "build:backend": "cd ./backend && yarn run build:webpack",
+    "clean:backend": "cd ./backend && yarn run clean",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^8.0.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

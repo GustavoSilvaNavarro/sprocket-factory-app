@@ -1,0 +1,20 @@
+{
+  "cSpell.words": [
+    "codepaths",
+    "cspotcode",
+    "espree",
+    "hstore",
+    "humanwhocodes",
+    "jridgewell",
+    "linebreak",
+    "minimatch",
+    "nodelib",
+    "Parens",
+    "prestart",
+    "tsbuildinfo"
+  ],
+  "eslint.workingDirectories": [
+    "./backend",
+    "./frontend"
+  ],
+}

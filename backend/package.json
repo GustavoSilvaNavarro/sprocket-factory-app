@@ -1,0 +1,47 @@
+{
+  "name": "sprocket-api",
+  "version": "1.0.0",
+  "description": "Sprocket API for sprocket factory app",
+  "main": "dist/app.js",
+  "author": "Gustavo Silva <gustavo.silva.nav@gmail.com>",
+  "repository": "no yet",
+  "license": "MIT",
+  "scripts": {
+    "start": "node .",
+    "prestart": "npm run build:webpack",
+    "format-check:prettier": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
+    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --quiet",
+    "start:dev": "nodemon src/app.ts --exec ts-node",
+    "build": "tsc",
+    "build:webpack": "webpack",
+    "start:production": "yarn run build:webpack && node .",
+    "clean": "rmdir /s /q dist"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mysql2": "^3.0.1",
+    "pg": "^8.9.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.28.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.16",
+    "@types/morgan": "^1.9.4",
+    "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.49.0",
+    "@typescript-eslint/parser": "^5.49.0",
+    "eslint": "^8.32.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.3",
+    "ts-loader": "^9.4.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  }
+}
