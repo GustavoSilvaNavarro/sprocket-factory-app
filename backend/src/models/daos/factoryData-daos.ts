@@ -1,7 +1,9 @@
+import { Sequelize } from 'sequelize';
+
 import { FactoriesSchema } from '@/models/schemas/factoryData-schema';
 import { CompanySchema } from '@/models/schemas/company-schemas';
 import { checkData } from '@/helpers/helper-functions';
-import { IFactoryData } from '@/types/sprocket-types';
+import { IFactoryData, AllFactoryData, IDataList, IFactoryList } from '@/types/sprocket-types';
 import { AppErrors, HttpStatusCode } from '@/helpers/app-error';
 
 const isCompanyFound = async (factoryId: number) => {
@@ -36,21 +38,75 @@ export const getSingleData = async (idFactory: string) => {
   const companyExist = await isCompanyFound(factoryId);
 
   if (companyExist) {
-    const factoryData = await FactoriesSchema.findAll({
+    const dataByFactoryId = await FactoriesSchema.findAll({
       where: { factoryId },
       attributes: { exclude: ['id', 'factoryId'] },
     });
 
-    return {
-      factory: {
-        chart_data: {
-          sprocket_production_actual: factoryData.map(el => el.getDataValue('sprocket_production_actual')),
-          sprocket_production_goal: factoryData.map(el => el.getDataValue('sprocket_production_goal')),
-          time: factoryData.map(el => el.getDataValue('time')),
-        },
-      },
-    };
+    const result = {} as { chart_data: IFactoryList };
+
+    //? Looping through the array to shape the data
+    while (dataByFactoryId.length > 0) {
+      const data = dataByFactoryId.pop(); //? decreasing the size of the array
+      if (!data) break;
+
+      if (Object.prototype.hasOwnProperty.call(result, 'chart_data')) {
+        //? if the property exist push their values to the object
+        result.chart_data.sprocket_production_actual.push(data.getDataValue('sprocket_production_actual'));
+        result.chart_data.sprocket_production_goal.push(data.getDataValue('sprocket_production_goal'));
+        result.chart_data.time.push(data.getDataValue('time'));
+      } else {
+        //? If it does not exist create object
+        result['chart_data'] = {
+          sprocket_production_actual: [data.getDataValue('sprocket_production_actual')],
+          sprocket_production_goal: [data.getDataValue('sprocket_production_goal')],
+          time: [data.getDataValue('time')],
+        };
+      }
+    }
+
+    return { factory: result };
   }
 
   throw new AppErrors({ message: 'Company does not exist', httpCode: HttpStatusCode.BAD_REQUEST, code: 3 });
+};
+
+export const getAllFactoryData = async () => {
+  const factoryData = (await FactoriesSchema.findAll({
+    raw: true,
+    attributes: { exclude: ['id'], include: [[Sequelize.col('company.name'), 'name']] },
+    include: {
+      model: CompanySchema,
+      as: 'company',
+      attributes: { exclude: ['id', 'name'] },
+    },
+  })) as unknown as Array<IDataList>;
+
+  const result = {} as AllFactoryData;
+
+  //? Looping through the array to shape the data
+  while (factoryData.length > 0) {
+    const data = factoryData.pop(); //? decreasing the size of the array
+    if (!data) break;
+
+    if (Object.prototype.hasOwnProperty.call(result, data.name)) {
+      //? if the property exist push their values to the object
+      result[`${data.name}`].factory.chart_data.sprocket_production_actual.push(data.sprocket_production_actual);
+      result[`${data.name}`].factory.chart_data.sprocket_production_goal.push(data.sprocket_production_goal);
+      result[`${data.name}`].factory.chart_data.time.push(data.time);
+    } else {
+      //? If it does not exist create object
+      result[`${data.name}`] = {
+        factory: {
+          chart_data: {
+            sprocket_production_actual: [data.sprocket_production_actual],
+            sprocket_production_goal: [data.sprocket_production_goal],
+            time: [data.time],
+          },
+        },
+      };
+    }
+  }
+
+  return { factories: Object.values(result) };
 };
