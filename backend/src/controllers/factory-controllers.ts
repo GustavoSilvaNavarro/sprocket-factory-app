@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { postNewFactoryData } from '@/models/daos/factoryData-daos';
+import { postNewFactoryData, getSingleData } from '@/models/daos/factoryData-daos';
 import { IFactoryData } from '@/types/sprocket-types';
 import { IParamFactory } from '@/types/route-types';
 
@@ -27,9 +27,11 @@ export const retrieveFactoriesData = (req: Request, res: Response, next: NextFun
   }
 };
 
-export const retrieveSingleFactoryData = (req: Request<IParamFactory>, res: Response, next: NextFunction) => {
+export const retrieveSingleFactoryData = async (req: Request<IParamFactory>, res: Response, next: NextFunction) => {
   try {
-    return res.status(200).json({ msg: 'Yooo' });
+    const data = await getSingleData(req.params.idFactory);
+
+    return res.status(200).json(data);
   } catch (err) {
     console.error(err);
     next(err);
