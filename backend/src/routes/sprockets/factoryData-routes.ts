@@ -9,7 +9,7 @@ import {
 const router = Router();
 
 router.get('/data', retrieveFactoriesData);
-router.post('/new-data', createNewFactoryData);
+router.post('/new-data/:idFactory', createNewFactoryData);
 router.get('/data/:idFactory', retrieveSingleFactoryData);
 
 export default router;

@@ -8,7 +8,7 @@ const { app } = serverConnection;
 
 (async function main() {
   try {
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ force: false });
     console.log(`Connection to ${env.dbDatabaseName} has been established successfully`);
 
     app.listen(app.get('port'), () => {

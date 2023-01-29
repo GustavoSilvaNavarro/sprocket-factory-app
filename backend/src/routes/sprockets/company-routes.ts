@@ -1,7 +1,9 @@
 import { Router } from 'express';
 
+import { createNewCompany } from '@/controllers/company-controllers';
+
 const router = Router();
 
-// router.get('/', createNewFactory);
+router.post('/', createNewCompany);
 
 export default router;

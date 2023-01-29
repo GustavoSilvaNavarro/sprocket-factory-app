@@ -8,6 +8,7 @@ export interface IFactoryData {
   sprocket_production_actual: number;
   sprocket_production_goal: number;
   time: number;
+  factoryId?: number;
 }
 
 export interface ISprockets {

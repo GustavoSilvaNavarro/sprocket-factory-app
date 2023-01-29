@@ -1,9 +1,10 @@
 import { DataTypes, Model, Optional } from 'sequelize';
 
 import { sequelize } from '@/models/connectionDb';
+import { FactoriesSchema } from '@/models/schemas/factoryData-schema';
 import { ICompany } from '@/types/sprocket-types';
 
-export const FactoriesSchema = sequelize.define<Model<ICompany, Optional<ICompany, 'id'>>>(
+export const CompanySchema = sequelize.define<Model<ICompany, Optional<ICompany, 'id'>>>(
   'companies',
   {
     id: {
@@ -22,3 +23,14 @@ export const FactoriesSchema = sequelize.define<Model<ICompany, Optional<ICompan
     timestamps: false,
   }
 );
+
+CompanySchema.hasMany(FactoriesSchema, {
+  foreignKey: 'factoryId',
+  sourceKey: 'id',
+  onDelete: 'CASCADE',
+});
+
+FactoriesSchema.belongsTo(CompanySchema, {
+  foreignKey: 'factoryId',
+  targetKey: 'id',
+});
