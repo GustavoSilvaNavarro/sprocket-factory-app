@@ -15,7 +15,7 @@ export interface IDataList extends IFactoryData {
   name: string;
 }
 
-export interface ISprockets {
+export interface ISprocket {
   id?: number;
   teeth: number;
   pitch_diameter: number;

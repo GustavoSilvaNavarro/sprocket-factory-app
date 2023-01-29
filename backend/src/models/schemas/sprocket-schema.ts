@@ -1,9 +1,9 @@
 import { DataTypes, Model, Optional } from 'sequelize';
 
 import { sequelize } from '@/models/connectionDb';
-import { ISprockets } from '@/types/sprocket-types';
+import { ISprocket } from '@/types/sprocket-types';
 
-export const SprocketsSchema = sequelize.define<Model<ISprockets, Optional<ISprockets, 'id'>>>(
+export const SprocketsSchema = sequelize.define<Model<ISprocket, Optional<ISprocket, 'id'>>>(
   'sprockets',
   {
     id: {

@@ -11,6 +11,6 @@ export const addCompany = async (payload: ICompany) => {
     });
   }
 
-  const newFactory = await CompanySchema.create(payload);
+  const newFactory = await CompanySchema.create({ ...payload });
   return newFactory;
 };
