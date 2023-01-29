@@ -3,6 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 
 import env from '@/config/env';
+import appRoutes from '@/routes';
 import { pageNotFound } from '@/middleware/pageNotFound';
 import { errorHandler } from '@/middleware/error-handler';
 
@@ -17,6 +18,8 @@ app.use(
   })
 );
 app.use(morgan('dev'));
+
+app.use('/', appRoutes);
 
 app.use('*', pageNotFound);
 app.use(errorHandler);

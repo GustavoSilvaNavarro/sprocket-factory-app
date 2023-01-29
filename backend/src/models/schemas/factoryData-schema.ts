@@ -1,9 +1,9 @@
 import { DataTypes, Model, Optional } from 'sequelize';
 
 import { sequelize } from '@/models/connectionDb';
-import { IFactory } from '@/types/sprocket-types';
+import { IFactoryData } from '@/types/sprocket-types';
 
-export const FactoriesSchema = sequelize.define<Model<IFactory, Optional<IFactory, 'id'>>>(
+export const FactoriesSchema = sequelize.define<Model<IFactoryData, Optional<IFactoryData, 'id'>>>(
   'factories',
   {
     id: {
@@ -33,7 +33,7 @@ export const FactoriesSchema = sequelize.define<Model<IFactory, Optional<IFactor
       },
     },
     time: {
-      type: DataTypes.DATE,
+      type: DataTypes.BIGINT,
       allowNull: false,
       defaultValue: Date.now(),
     },

@@ -1,8 +1,13 @@
-export interface IFactory {
+export interface ICompany {
+  id?: number;
+  name: string;
+}
+
+export interface IFactoryData {
   id?: number;
   sprocket_production_actual: number;
   sprocket_production_goal: number;
-  time: Date;
+  time: number;
 }
 
 export interface ISprockets {
