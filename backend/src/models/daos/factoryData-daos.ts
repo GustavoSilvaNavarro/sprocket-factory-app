@@ -110,3 +110,7 @@ export const getAllFactoryData = async () => {
 
   return { factories: Object.values(result) };
 };
+
+export const getFactoryData = async () => {
+  return await FactoriesSchema.findAll({});
+};

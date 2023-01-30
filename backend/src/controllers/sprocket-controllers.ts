@@ -1,22 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
 
-import {
-  addNewSprocketType,
-  getAllSprockets,
-  getSingleSprocket,
-  updateSprocket,
-  addProductType,
-} from '@/models/daos/sprocket-daos';
-import { ISprocket, ProductType } from '@/types/sprocket-types';
-import { ParamSprocket, ParamProduct } from '@/types/route-types';
+import { addNewSprocketType, getAllSprockets, getSingleSprocket, updateSprocket } from '@/models/daos/sprocket-daos';
+import { ISprocket } from '@/types/sprocket-types';
+import { ParamSprocket } from '@/types/route-types';
 
 export const createNewSprocketType = async (
-  req: Request<ParamProduct, never, ISprocket>,
+  req: Request<never, never, ISprocket>,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const newSprocket = await addNewSprocketType(req.params.idProduct, req.body);
+    const newSprocket = await addNewSprocketType(req.body);
 
     return res.status(201).json(newSprocket);
   } catch (err) {
@@ -56,17 +50,6 @@ export const retrieveAllSprocket = async (_req: Request, res: Response, next: Ne
     const allSprockets = await getAllSprockets();
 
     return res.status(200).json({ sprockets: allSprockets });
-  } catch (err) {
-    console.error(err);
-    next(err);
-  }
-};
-
-export const createProductType = async (req: Request<never, never, ProductType>, res: Response, next: NextFunction) => {
-  try {
-    const newProduct = await addProductType(req.body);
-
-    return res.status(201).json(newProduct);
   } catch (err) {
     console.error(err);
     next(err);

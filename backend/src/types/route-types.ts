@@ -5,7 +5,3 @@ export interface IParamFactory {
 export type ParamSprocket = {
   idSprocket: string;
 };
-
-export type ParamProduct = {
-  idProduct: string;
-};

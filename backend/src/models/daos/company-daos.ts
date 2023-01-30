@@ -14,3 +14,7 @@ export const addCompany = async (payload: ICompany) => {
   const newFactory = await CompanySchema.create({ ...payload });
   return newFactory;
 };
+
+export const allCompanyDetails = async () => {
+  return await CompanySchema.findAll({});
+};
