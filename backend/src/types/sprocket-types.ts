@@ -3,6 +3,8 @@ export interface ICompany {
   name: string;
 }
 
+export type ProductType = ICompany;
+
 export interface IFactoryData {
   id?: number;
   sprocket_production_actual: number;
@@ -21,6 +23,7 @@ export interface ISprocket {
   pitch_diameter: number;
   outside_diameter: number;
   pitch: number;
+  productTypeId?: number;
 }
 
 export interface IFactoryList {
