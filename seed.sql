@@ -1,0 +1,105 @@
+CREATE TABLE IF NOT EXISTS companies (
+	id SERIAL NOT NULL,
+	name character varying(255) COLLATE pg_catalog."default" NOT NULL DEFAULT ''::character varying,
+	CONSTRAINT companies_pkey PRIMARY KEY (id)
+);
+
+INSERT INTO companies(name) VALUES
+	('Company One'),
+	('Company Two'),
+	('Company Three'),
+	('Company Four');
+
+CREATE TABLE IF NOT EXISTS factories (
+	id SERIAL NOT NULL,
+	sprocket_production_actual integer NOT NULL DEFAULT 0,
+	sprocket_production_goal integer NOT NULL DEFAULT 0,
+	"time" bigint NOT NULL DEFAULT '1675189972009'::bigint,
+	"factoryId" integer,
+	CONSTRAINT factories_pkey PRIMARY KEY (id),
+	CONSTRAINT "factories_factoryId_fkey" FOREIGN KEY ("factoryId")
+			REFERENCES public.companies (id) MATCH SIMPLE
+			ON UPDATE CASCADE
+			ON DELETE CASCADE
+);
+
+INSERT INTO factories(sprocket_production_actual, sprocket_production_goal, "time", "factoryId") VALUES
+	(59,49,1675039258846,1),
+	(59,49,1675039258846,1),
+	(59,49,1675039258846,1),
+	(59,49,1675039258846,1),
+	(59,49,1675039258846,1),
+	(99,109,1675039258846,1),
+	(99,109,1675039258846,1),
+	(99,109,1675039258846,1),
+	(99,109,1675039258846,1),
+	(99,109,1675039258846,1),
+	(9,19,1675039258846,2),
+	(9,19,1675039258846,2),
+	(9,19,1675039258846,2),
+	(9,19,1675039258846,2),
+	(9,19,1675039258846,2),
+	(39,79,1675039258846,2),
+	(39,79,1675039258846,2),
+	(39,79,1675039258846,2),
+	(39,79,1675039258846,2),
+	(39,79,1675039258846,2),
+	(999,1009,1675039258846,3),
+	(999,1009,1675039258846,3),
+	(999,1009,1675039258846,3),
+	(999,1009,1675039258846,3),
+	(999,1009,1675039258846,3),
+	(88,28,1675039258846,3),
+	(88,28,1675039258846,3),
+	(88,28,1675039258846,3),
+	(88,28,1675039258846,3),
+	(88,28,1675039258846,3),
+	(88,28,1675039258846,3),
+	(39,26,1675039258846,4),
+	(39,26,1675039258846,4),
+	(39,26,1675039258846,4),
+	(39,26,1675039258846,4),
+	(39,26,1675039258846,4),
+	(22,38,1675039258846,4),
+	(22,38,1675039258846,4),
+	(22,38,1675039258846,4),
+	(22,38,1675039258846,4),
+	(22,38,1675039258846,4);
+
+
+CREATE TABLE IF NOT EXISTS sprockets (
+	id SERIAL NOT NULL,
+	teeth integer NOT NULL DEFAULT 0,
+	pitch_diameter integer NOT NULL DEFAULT 0,
+	outside_diameter integer NOT NULL DEFAULT 0,
+	pitch integer NOT NULL DEFAULT 0,
+	CONSTRAINT sprockets_pkey PRIMARY KEY (id)
+);
+
+INSERT INTO sprockets(teeth, pitch_diameter, outside_diameter, pitch) VALUES
+	(5,5,5,5),
+	(5,5,5,5),
+	(9,9,9,9),
+	(9,9,9,9),
+	(9,9,9,9),
+	(15,15,15,15),
+	(49,49,49,49),
+	(49,49,49,49),
+	(49,49,49,49),
+	(1,1,1,1),
+	(1,1,1,1),
+	(1,1,1,1),
+	(96,96,96,96),
+	(96,96,96,96),
+	(96,96,96,96),
+	(25,25,25,25),
+	(25,25,25,25),
+	(25,25,25,25),
+	(25,25,25,25),
+	(36,36,36,36),
+	(36,36,36,36),
+	(36,36,36,36),
+	(45,45,45,45),
+	(45,45,45,45),
+	(45,45,45,45),
+	(39,59,30,999)
