@@ -1,5 +1,6 @@
 {
   "cSpell.words": [
+    "Adming",
     "codepaths",
     "cspotcode",
     "DATABASENAME",
@@ -11,7 +12,9 @@
     "minimatch",
     "nodelib",
     "Parens",
+    "PGADMIN",
     "prestart",
+    "Sprocketapi",
     "tsbuildinfo"
   ],
   "eslint.workingDirectories": [

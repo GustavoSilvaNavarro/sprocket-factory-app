@@ -1,17 +1,51 @@
 version: '3.9'
 
 services:
+  db:
+    image: postgres:15-alpine
+    container_name: postgres-db
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=superSecretDBPassword
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=sprocket_db
+    ports:
+      - 5432:5432
+    networks:
+      - apishared-network
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
   server:
     container_name: sprocket-api
     restart: unless-stopped
     image: sprocket-api:1.0.0
     build:
-      context: bakckend
-      dockerfile: dockerfile
+      context: backend
+      dockerfile: Dockerfile
     ports:
       - 8080:8080
+    networks:
+      - apishared-network
+    depends_on:
+      - db
+
+  pgadmin-compose:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=placeholder@example.com
+      - PGADMIN_DEFAULT_PASSWORD=fakepassword123!
+    ports:
+      - 16543:80
+    depends_on:
+      - db
+    links:
+      - db
     networks:
       - apishared-network
 
 networks:
   apishared-network:
+
+volumes:
+  pgdata: {}
