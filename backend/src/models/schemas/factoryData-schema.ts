@@ -37,6 +37,10 @@ export const FactoriesSchema = sequelize.define<Model<IFactoryData, Optional<IFa
       allowNull: false,
       defaultValue: Date.now(),
     },
+    factoryId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
   {
     timestamps: false,

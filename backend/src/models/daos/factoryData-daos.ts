@@ -30,7 +30,6 @@ export const postNewFactoryData = async (idFactory: string, payload: IFactoryDat
 
 export const getSingleData = async (idFactory: string) => {
   const factoryId = Number(idFactory);
-
   if (checkData(factoryId)) {
     throw new AppErrors({ message: 'Invalid ID', httpCode: HttpStatusCode.BAD_REQUEST, code: 3 });
   }

@@ -9,7 +9,7 @@ const env = {
   clientAppUrl: process.env.CLIENT_DOMAIN,
 };
 
-if (process.env.NODE_ENV === 'testing') {
+if (process.env.NODE_ENV === 'test') {
   env.appPort = Number(process.env.PORT_TEST);
   env.dbDatabaseName = process.env.DB_SQL_DATABASENAME_TEST as string;
 }
