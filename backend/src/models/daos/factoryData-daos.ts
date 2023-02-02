@@ -36,38 +36,38 @@ export const getSingleData = async (idFactory: string) => {
 
   const companyExist = await isCompanyFound(factoryId);
 
-  if (companyExist) {
-    const dataByFactoryId = await FactoriesSchema.findAll({
-      where: { factoryId },
-      attributes: { exclude: ['id', 'factoryId'] },
-    });
-
-    const result = {} as { chart_data: IFactoryList };
-
-    //? Looping through the array to shape the data
-    while (dataByFactoryId.length > 0) {
-      const data = dataByFactoryId.pop(); //? decreasing the size of the array
-      if (!data) break;
-
-      if (Object.prototype.hasOwnProperty.call(result, 'chart_data')) {
-        //? if the property exist push their values to the object
-        result.chart_data.sprocket_production_actual.push(data.getDataValue('sprocket_production_actual'));
-        result.chart_data.sprocket_production_goal.push(data.getDataValue('sprocket_production_goal'));
-        result.chart_data.time.push(data.getDataValue('time'));
-      } else {
-        //? If it does not exist create object
-        result['chart_data'] = {
-          sprocket_production_actual: [data.getDataValue('sprocket_production_actual')],
-          sprocket_production_goal: [data.getDataValue('sprocket_production_goal')],
-          time: [data.getDataValue('time')],
-        };
-      }
-    }
-
-    return { factory: result };
+  if (!companyExist) {
+    throw new AppErrors({ message: 'Company does not exist', httpCode: HttpStatusCode.BAD_REQUEST, code: 3 });
   }
 
-  throw new AppErrors({ message: 'Company does not exist', httpCode: HttpStatusCode.BAD_REQUEST, code: 3 });
+  const dataByFactoryId = (await FactoriesSchema.findAll({
+    where: { factoryId },
+    attributes: { exclude: ['id', 'factoryId'] },
+  })) as unknown as Array<IFactoryData>;
+
+  const result = {} as { chart_data: IFactoryList };
+
+  //? Looping through the array to shape the data
+  while (dataByFactoryId.length > 0) {
+    const data = dataByFactoryId.pop(); //? decreasing the size of the array
+    if (!data) break;
+
+    if (Object.prototype.hasOwnProperty.call(result, 'chart_data')) {
+      //* if the property exist push their values to the object
+      result.chart_data.sprocket_production_actual.push(data.sprocket_production_actual);
+      result.chart_data.sprocket_production_goal.push(data.sprocket_production_goal);
+      result.chart_data.time.push(data.time);
+    } else {
+      //? If it does not exist create object
+      result['chart_data'] = {
+        sprocket_production_actual: [data.sprocket_production_actual],
+        sprocket_production_goal: [data.sprocket_production_goal],
+        time: [data.time],
+      };
+    }
+  }
+
+  return { factory: result };
 };
 
 export const getAllFactoryData = async () => {
@@ -108,8 +108,4 @@ export const getAllFactoryData = async () => {
   }
 
   return { factories: Object.values(result) };
-};
-
-export const getFactoryData = async () => {
-  return await FactoriesSchema.findAll({});
 };

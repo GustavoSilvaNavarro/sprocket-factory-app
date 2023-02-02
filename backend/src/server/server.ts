@@ -14,7 +14,7 @@ app.set('port', process.env.PORT || env.appPort || 8080);
 app.use(express.json());
 app.use(
   cors({
-    origin: env.clientAppUrl,
+    origin: env.clientAppUrl || '*',
   })
 );
 app.use(morgan('dev'));

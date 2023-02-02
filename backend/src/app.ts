@@ -16,6 +16,6 @@ const { app } = serverConnection;
       logger.info(`Express Server 🚀 running on PORT ${app.get('port')}`);
     });
   } catch (err) {
-    console.error('Unable to connect to database', err);
+    logger.error('Unable to connect to database');
   }
 })();
