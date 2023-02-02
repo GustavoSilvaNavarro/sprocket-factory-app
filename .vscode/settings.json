@@ -9,6 +9,7 @@
     "humanwhocodes",
     "jridgewell",
     "linebreak",
+    "maxsize",
     "minimatch",
     "nodelib",
     "Parens",

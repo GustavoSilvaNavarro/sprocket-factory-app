@@ -3,6 +3,8 @@ import { Request, Response, NextFunction } from 'express';
 import { postNewFactoryData, getSingleData, getAllFactoryData, getFactoryData } from '@/models/daos/factoryData-daos';
 import { IFactoryData } from '@/types/sprocket-types';
 import { IParamFactory } from '@/types/route-types';
+import { logger } from '@/utils/loggers';
+import { AppErrors } from '@/helpers/app-error';
 
 export const createNewFactoryData = async (
   req: Request<IParamFactory, never, IFactoryData>,
@@ -13,7 +15,7 @@ export const createNewFactoryData = async (
     const newData = await postNewFactoryData(req.params.idFactory, req.body);
     return res.status(201).json(newData);
   } catch (err) {
-    console.error(err);
+    logger.error((err as AppErrors).message);
     next(err);
   }
 };
@@ -24,7 +26,7 @@ export const retrieveFactoriesData = async (req: Request, res: Response, next: N
 
     return res.status(200).json(result);
   } catch (err) {
-    console.error(err);
+    logger.error((err as AppErrors).message);
     next(err);
   }
 };
@@ -35,7 +37,7 @@ export const retrieveSingleFactoryData = async (req: Request<IParamFactory>, res
 
     return res.status(200).json(data);
   } catch (err) {
-    console.error(err);
+    logger.error((err as AppErrors).message);
     next(err);
   }
 };
@@ -46,7 +48,7 @@ export const getFactoriesDetails = async (req: Request, res: Response, next: Nex
 
     return res.status(200).json(result);
   } catch (err) {
-    console.error(err);
+    logger.error((err as AppErrors).message);
     next(err);
   }
 };

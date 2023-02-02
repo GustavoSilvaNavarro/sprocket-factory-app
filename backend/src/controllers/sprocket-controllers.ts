@@ -3,6 +3,8 @@ import { Request, Response, NextFunction } from 'express';
 import { addNewSprocketType, getAllSprockets, getSingleSprocket, updateSprocket } from '@/models/daos/sprocket-daos';
 import { ISprocket } from '@/types/sprocket-types';
 import { ParamSprocket } from '@/types/route-types';
+import { logger } from '@/utils/loggers';
+import { AppErrors } from '@/helpers/app-error';
 
 export const createNewSprocketType = async (
   req: Request<never, never, ISprocket>,
@@ -14,7 +16,7 @@ export const createNewSprocketType = async (
 
     return res.status(201).json(newSprocket);
   } catch (err) {
-    console.error(err);
+    logger.error((err as AppErrors).message);
     next(err);
   }
 };
@@ -29,7 +31,7 @@ export const updateSprocketType = async (
 
     return res.status(200).json(updatedSprocket);
   } catch (err) {
-    console.error(err);
+    logger.error((err as AppErrors).message);
     next(err);
   }
 };
@@ -40,7 +42,7 @@ export const retrieveSingleSprocket = async (req: Request<ParamSprocket>, res: R
 
     return res.status(200).json(sprocket);
   } catch (err) {
-    console.error(err);
+    logger.error((err as AppErrors).message);
     next(err);
   }
 };
@@ -51,7 +53,7 @@ export const retrieveAllSprocket = async (_req: Request, res: Response, next: Ne
 
     return res.status(200).json({ sprockets: allSprockets });
   } catch (err) {
-    console.error(err);
+    logger.error((err as AppErrors).message);
     next(err);
   }
 };
