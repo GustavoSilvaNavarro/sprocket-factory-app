@@ -4,7 +4,7 @@ Sprocket API is a Nodejs server application that was built using Express which i
 
 ## How to Set Up Sprocket API
 
-### OPTION 1 - Run Sprocketapi on your machine (A bit more tedious)
+### OPTION 1 - Run Sprocket API on your machine (A bit more tedious)
 
 1) Install [Node.js](http://nodejs.org/) - Sprocketapi requires Node v16 or above
 
